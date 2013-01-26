@@ -7,9 +7,11 @@ define("main", ["renderable/Renderable","renderable/RenderObject"], function(Ren
 
 
   var stage = new createjs.Stage(document.getElementById('canvas'));
+  
+  a.setPosition({x:20,y:20});
 
-  stage.addChild(a.symbol)
-       .addChild(b.symbol);
+  stage.addChild(a.symbol);
+  stage.addChild(b.symbol);
 
 
   stage.update();

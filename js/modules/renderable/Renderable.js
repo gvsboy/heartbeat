@@ -2,14 +2,14 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
 
   exports.Renderable = Fiber.extend(function() {
 
-
-
     function getPosition() {
       return {x: this.symbol.x, y: this.symbol.y};
     }
 
     function setPosition(val) {
       //this.symbol = val;
+      this.symbol.x = val.x;
+      this.symbol.y = val.y;
     }
 
     function getSymbol() {
@@ -32,6 +32,7 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
 
       console.log('I\'m new!');
     }
+    
     return {
       init: init,
       getPosition: getPosition,
