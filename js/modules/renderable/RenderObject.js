@@ -8,7 +8,11 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
 
     // Public
     function init () {
-      base.init.call(this);
+      var graphics = new createjs.Graphics();
+      graphics.beginFill('blue')
+      .drawCircle(0,0,10);
+      
+      base.init.call(this, graphics);
     }
 
     return {

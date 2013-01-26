@@ -21,14 +21,12 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
       this.symbol.addChild(shape);
     }
     
-    function init() {
+    function init(g) {
       this.symbol = new createjs.Container();
 
-      var graphics = new createjs.Graphics();
-      graphics.beginFill('red')
-              .drawCircle(0,0,10);
-
-      this.addShape(graphics);
+      if (g) {
+        this.addShape(g);
+      }
 
       console.log('I\'m new!');
     }
