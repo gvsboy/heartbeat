@@ -10,8 +10,14 @@
 	<body>
 		<canvas id="canvas" width="450" height="450" style="background-color:#abcdef"></canvas>
 		<script src="http://code.createjs.com/easeljs-0.5.0.min.js"></script>
-		<script src="js/fiber.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="js/inject.min.js"></script>
+		<script>
+			Inject.clearCache();
+			Inject.reset();
+			Inject.setExpires(0);
+			Inject.setModuleRoot("js/modules");
+			require.run("main");
+		</script>
 	</body>
  
 </html>
