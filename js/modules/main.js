@@ -10,7 +10,15 @@ function(Renderable, RenderObject, Player, Monster, Flashlight) {
   var stage = new createjs.Stage(document.getElementById('canvas'));
 
   // Just test code
-
+	
+	// Need this shape for the flashlight effect to be ... effective.
+	// testing of course!
+	var bg = new createjs.Shape();
+	bg.graphics
+		.beginFill("grey")
+		.drawRect(0, 0, 450, 450);
+	stage.addChild(bg);
+	
   var Keyboard = function () {
     this._pressed = {};
   };
@@ -27,7 +35,6 @@ function(Renderable, RenderObject, Player, Monster, Flashlight) {
   // Add the event listeners
   window.addEventListener('keyup', function(ev){keyboard._keyUp(ev);}, false);
   window.addEventListener('keydown', function(ev) {keyboard._keyDown(ev);}, false);
-
 
   console.log("Game start!");
 
@@ -82,7 +89,7 @@ function(Renderable, RenderObject, Player, Monster, Flashlight) {
 	ticker.setFPS(30);
 	
 	function tick() {
-    c.update();
+    	c.update();
 		flashlight.update();
     Monsters.update();
 		stage.update();
