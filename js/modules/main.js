@@ -2,13 +2,19 @@ define("main", [
 	"renderable/Renderable",
 	"renderable/RenderObject",
 	"renderable/Player",
-	"renderable/Flashlight"
+	"flashlight"
 ],
-function(Renderable, RenderObject, Player, Flashlight) {
+function(Renderable, RenderObject, Player, flashlight) {
 	
   var stage = new createjs.Stage(document.getElementById('canvas'));
 
   // Just test code
+
+	var bg = new createjs.Shape();
+	bg.graphics
+		.beginFill("grey")
+		.drawRect(0, 0, 450, 450);
+	stage.addChild(bg);
 
   console.log("Game start!");
 
@@ -34,8 +40,10 @@ function(Renderable, RenderObject, Player, Flashlight) {
   
   // End test code
 
-	var flashlight = new Flashlight.Flashlight();
-	stage.addChild(flashlight.symbol);
+//	var flashlight = new Flashlight.Flashlight();
+//	stage.addChild(flashlight.symbol);
+	
+	flashlight.init(stage);
 	
 	var ticker = createjs.Ticker;
 	ticker.addListener(tick);

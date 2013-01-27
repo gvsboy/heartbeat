@@ -15,11 +15,22 @@ define("flashlight", ["renderable/Renderable"], function(Renderable) {
 			
 			update: function() {
 				if (!this.stage) {
-					this.stage = this.symbol.getStage();
+					this.configure();
 				}
 				else {
 					this.setPosition({x: this.stage.mouseX, y: this.stage.mouseY});
+					this.mask.x = this.stage.mouseX;
+					this.mask.y = this.stage.mouseY;
 				}
+			},
+			
+			configure: function() {
+				
+				// Set an instance of the stage. If the stage doesn't exist, that probably means
+				// the flashlight hasn't been added to it---ABORT!
+				var stage = this.stage = this.symbol.getStage();
+				if (!this.stage) { return; }
+				
 			}
 			
 		}
