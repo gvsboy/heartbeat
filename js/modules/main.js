@@ -9,12 +9,31 @@ function(Renderable, RenderObject, Player, flashlight) {
   var stage = new createjs.Stage(document.getElementById('canvas'));
 
   // Just test code
-
+	
+	// Need this shape for the flashlight effect to be ... effective.
+	// testing of course!
 	var bg = new createjs.Shape();
 	bg.graphics
 		.beginFill("grey")
 		.drawRect(0, 0, 450, 450);
 	stage.addChild(bg);
+	
+  var Keyboard = function () {
+    this._pressed = {};
+  };
+
+  Keyboard.prototype._keyDown = function (ev){
+    this._pressed[ev.keyCode] = (new Date()).getTime();
+  };
+
+  Keyboard.prototype._keyUp = function(ev) {
+    delete this._pressed[ev.keyCode];
+  };
+
+  var keyboard = new Keyboard();
+  // Add the event listeners
+  window.addEventListener('keyup', function(ev){keyboard._keyUp(ev);}, false);
+  window.addEventListener('keydown', function(ev) {keyboard._keyDown(ev);}, false);
 
   console.log("Game start!");
 
@@ -31,7 +50,7 @@ function(Renderable, RenderObject, Player, flashlight) {
 
   var b = new RenderObject.RenderObject(graphics2);
 
-  var c = new Player.Player({x:1,y:1}, {x:0.1, y:0.1});
+  var c = new Player.Player({keyboard: keyboard});
   a.setPosition({x:20,y:20});
 
   stage.addChild(a.symbol);
@@ -51,7 +70,7 @@ function(Renderable, RenderObject, Player, flashlight) {
 	ticker.setFPS(30);
 	
 	function tick() {
-    	c.update();
+    c.update();
 		flashlight.update();
 		stage.update();
 	}
