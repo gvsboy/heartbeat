@@ -17,13 +17,17 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
       return this.acc;
     }
 
+    function setAcc(val) {
+      this.acc = val;
+    }
+
     function update() {
       // Accelerate
       this.vel.x += this.acc.x;
       this.vel.y += this.acc.y;
 
       // Move
-      this.move(vel.x, vel.y);
+      this.move(this.vel.x, this.vel.y);
     }
 
     function init(g, vel, acc) {
@@ -31,10 +35,16 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
 
       this.vel = vel || {x: 0, y: 0};
       this.acc = acc || {x: 0, y: 0};
+
     }
 
     return {
-      init: init
+      init: init,
+      update: update,
+      getVel: getVel,
+      setVel: setVel,
+      getAcc: getAcc,
+      setAcc: setAcc
     };
   });
 });

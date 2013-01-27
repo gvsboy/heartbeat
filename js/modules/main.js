@@ -18,10 +18,12 @@ define("main", ["renderable/Renderable","renderable/RenderObject", "renderable/F
 
   var b = new RenderObject.RenderObject(graphics2);
 
+  var c = new Player.Player({x:1,y:1}, {x:0.1, y:0.1});
   a.setPosition({x:20,y:20});
 
   stage.addChild(a.symbol);
   stage.addChild(b.symbol);
+  stage.addChild(c.symbol);
   
   // End test code
 
@@ -34,6 +36,7 @@ define("main", ["renderable/Renderable","renderable/RenderObject", "renderable/F
 	ticker.setFPS(30);
 	
 	function tick() {
+    	c.update();
 		flashlight.update();
 		stage.update();
 	}

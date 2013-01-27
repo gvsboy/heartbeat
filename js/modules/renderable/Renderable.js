@@ -26,6 +26,8 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
       this.symbol.addChild(shape);
     }
 
+    // We don't need to do anything on a logic update for
+    // the Renderable base class.
     function update() {}
 
     function init(g) {
