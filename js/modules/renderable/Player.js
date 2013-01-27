@@ -31,18 +31,15 @@ define('Player', ['renderable/RenderObject'], function(ro) {
     }
     
     function init(conf) {
-      var vel = conf.vel || {x: 0, y: 0},
-          acc = conf.acc || {x: 0, y: 0},
-          keyboard = conf.keyboard,
-          playerGraphics = new createjs.Graphics();
+      conf.vel = conf.vel || {x: 0, y: 0};
+      conf.acc = conf.acc || {x: 0, y: 0};
+      conf.graphics = conf.graphics || (new createjs.Graphics()).beginFill('green')
+                                                                .drawCircle(10,10,5);
 
-      this.keyboard = keyboard;
-      this.speed = 5;
+      this.keyboard = conf.keyboard;
+      this.speed = conf.speed || 5;
           
-      playerGraphics.beginFill('green')
-                    .drawCircle(10,10,5);
-
-      base.init.call(this, playerGraphics, vel, acc);
+      base.init.call(this, conf);
     }
 
     return {

@@ -2,9 +2,10 @@ define("main", [
 	"renderable/Renderable",
 	"renderable/RenderObject",
 	"renderable/Player",
+  "renderable/Monster",
 	"renderable/Flashlight"
 ],
-function(Renderable, RenderObject, Player, Flashlight) {
+function(Renderable, RenderObject, Player, Monster, Flashlight) {
 	
   var stage = new createjs.Stage(document.getElementById('canvas'));
 
@@ -44,12 +45,32 @@ function(Renderable, RenderObject, Player, Flashlight) {
   var b = new RenderObject.RenderObject(graphics2);
 
   var c = new Player.Player({keyboard: keyboard});
+  
+  var testMonster = new Monster.Monster({player: c});
+
+  // MONSTERS
+  //
+  var Monsters = {
+    list: [],
+    add: function() {
+      var newMon = new Monster.Monster({player: c, pos: {x: Math.floor(Math.random()*450), y: Math.floor(Math.random()*450)}});
+      stage.addChild(newMon.symbol);
+      this.list.push(newMon);
+    },
+    update: function() {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].update();
+      }
+    }
+  };
+
   a.setPosition({x:20,y:20});
 
   stage.addChild(a.symbol);
   stage.addChild(b.symbol);
   stage.addChild(c.symbol);
-  
+
+  window.mon = setInterval(function(){Monsters.add();}, 2000);
   // End test code
 
 	var flashlight = new Flashlight.Flashlight();
@@ -63,6 +84,7 @@ function(Renderable, RenderObject, Player, Flashlight) {
 	function tick() {
     c.update();
 		flashlight.update();
+    Monsters.update();
 		stage.update();
 	}
 

@@ -38,12 +38,13 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
       this.move(this.vel.x, this.vel.y);
     }
 
-    function init(g, vel, acc) {
-      base.init.call(this, g);
+    function init(conf) {
+      base.init.call(this, conf.graphics);
 
-      this.vel = vel || {x: 0, y: 0};
-      this.acc = acc || {x: 0, y: 0};
+      this.vel = conf.vel || {x: 0, y: 0};
+      this.acc = conf.acc || {x: 0, y: 0};
 
+      if (conf.pos) this.setPosition(conf.pos);
     }
 
     return {
