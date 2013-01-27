@@ -1,4 +1,11 @@
-define("main", ["renderable/Renderable","renderable/RenderObject", "renderable/Flashlight"], function(Renderable, RenderObject, Flashlight) {
+define("main", [
+	"renderable/Renderable",
+	"renderable/RenderObject",
+	"renderable/Player",
+	"renderable/Flashlight"
+],
+function(Renderable, RenderObject, Player, Flashlight) {
+	
   var stage = new createjs.Stage(document.getElementById('canvas'));
 
   // Just test code
