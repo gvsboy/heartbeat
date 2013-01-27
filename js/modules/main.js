@@ -1,4 +1,4 @@
-define("main", ["renderable/Renderable","renderable/RenderObject"], function(Renderable, RenderObject) {
+define("main", ["flashlight", "renderable/Renderable","renderable/RenderObject"], function(flashlight, Renderable, RenderObject) {
 
   console.log("Game start!");
 
@@ -22,5 +22,17 @@ define("main", ["renderable/Renderable","renderable/RenderObject"], function(Ren
 
   console.log(a.getPosition());
   console.log(b.getPosition());
+
+	flashlight.init(stage);
+	
+	var ticker = createjs.Ticker;
+	ticker.addListener(tick);
+	ticker.useRAF = true;
+	ticker.setFPS(30);
+	
+	function tick() {
+		flashlight.tick();
+		stage.update();
+	}
 
 });
