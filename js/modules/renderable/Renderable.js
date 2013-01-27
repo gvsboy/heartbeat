@@ -12,6 +12,11 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
       this.symbol.y = val.y;
     }
 
+    function move(x, y) {
+      this.symbol.x += x;
+      this.symbol.y += y;
+    }
+
     function getSymbol() {
       return this.symbol;
     }
@@ -20,7 +25,9 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
       var shape = new createjs.Shape(g);
       this.symbol.addChild(shape);
     }
-    
+
+    function update() {}
+
     function init(g) {
       this.symbol = new createjs.Container();
 
@@ -30,13 +37,15 @@ define("renderable", ["lib/fiber.min"], function(Fiber) {
 
       console.log('I\'m new!');
     }
-    
+
     return {
       init: init,
       getPosition: getPosition,
       setPosition: setPosition,
+      move: move,
       getSymbol: getSymbol,
-      addShape: addShape 
+      addShape: addShape,
+      update: update 
     };
 
   });
