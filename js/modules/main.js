@@ -10,6 +10,24 @@ function(Renderable, RenderObject, Player, Flashlight) {
 
   // Just test code
 
+  var Keyboard = function () {
+    this._pressed = {};
+  };
+
+  Keyboard.prototype._keyDown = function (ev){
+    this._pressed[ev.keyCode] = (new Date()).getTime();
+  };
+
+  Keyboard.prototype._keyUp = function(ev) {
+    delete this._pressed[ev.keyCode];
+  };
+
+  var keyboard = new Keyboard();
+  // Add the event listeners
+  window.addEventListener('keyup', function(ev){keyboard._keyUp(ev);}, false);
+  window.addEventListener('keydown', function(ev) {keyboard._keyDown(ev);}, false);
+
+
   console.log("Game start!");
 
   var graphics = new createjs.Graphics();
@@ -25,7 +43,7 @@ function(Renderable, RenderObject, Player, Flashlight) {
 
   var b = new RenderObject.RenderObject(graphics2);
 
-  var c = new Player.Player({x:1,y:1}, {x:0.1, y:0.1});
+  var c = new Player.Player({keyboard: keyboard});
   a.setPosition({x:20,y:20});
 
   stage.addChild(a.symbol);
@@ -43,7 +61,7 @@ function(Renderable, RenderObject, Player, Flashlight) {
 	ticker.setFPS(30);
 	
 	function tick() {
-    	c.update();
+    c.update();
 		flashlight.update();
 		stage.update();
 	}

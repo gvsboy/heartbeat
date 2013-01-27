@@ -8,9 +8,17 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
     function getVel() {
       return this.vel;
     }
-    
+
     function setVel(val) {
       this.vel = val;
+    }
+
+    function setXVel(x) {
+      this.vel.x = x;
+    }
+
+    function setYVel(y) {
+      this.vel.y = y;
     }
 
     function getAcc() {
@@ -43,6 +51,8 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
       update: update,
       getVel: getVel,
       setVel: setVel,
+      setXVel: setXVel,
+      setYVel: setYVel,
       getAcc: getAcc,
       setAcc: setAcc
     };
