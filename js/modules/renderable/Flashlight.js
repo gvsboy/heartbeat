@@ -11,7 +11,8 @@ define("flashlight", ["renderable/Renderable"], function(Renderable) {
 				
 				// Initial orb configuration
 				this.radius = 120;
-				this.colorArray = ["rgba(102, 102, 102, 0)", "rgba(0, 0, 0, 0.9)"];
+				this.colors = ["rgba(102, 102, 102, 0)", "rgba(0, 0, 0, 0.9)"];
+				this.ratios = [0, 1];
 			},
 			
 			update: function() {
@@ -28,7 +29,7 @@ define("flashlight", ["renderable/Renderable"], function(Renderable) {
 					this.symbol.graphics
 						.setStrokeStyle(1)
 						.beginStroke("#000")
-						.beginRadialGradientFill(this.colorArray, [0, 1], x, y, 0, x, y, this.radius)
+						.beginRadialGradientFill(this.colors, this.ratios, x, y, 0, x, y, this.radius)
 						.drawCircle(this.stage.mouseX, this.stage.mouseY, this.radius);
 				}
 			},
