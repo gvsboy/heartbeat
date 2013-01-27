@@ -1,4 +1,4 @@
-define("main", ["flashlight", "renderable/Renderable","renderable/RenderObject"], function(flashlight, Renderable, RenderObject) {
+define("main", ["renderable/Renderable","renderable/RenderObject", "renderable/Flashlight"], function(Renderable, RenderObject, Flashlight) {
 
   console.log("Game start!");
 
@@ -23,7 +23,8 @@ define("main", ["flashlight", "renderable/Renderable","renderable/RenderObject"]
   console.log(a.getPosition());
   console.log(b.getPosition());
 
-	flashlight.init(stage);
+	var flashlight = new Flashlight.Flashlight();
+	stage.addChild(flashlight.symbol);
 	
 	var ticker = createjs.Ticker;
 	ticker.addListener(tick);
@@ -31,7 +32,7 @@ define("main", ["flashlight", "renderable/Renderable","renderable/RenderObject"]
 	ticker.setFPS(30);
 	
 	function tick() {
-		flashlight.tick();
+		flashlight.update();
 		stage.update();
 	}
 
