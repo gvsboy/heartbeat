@@ -1,4 +1,7 @@
 define("main", ["renderable/Renderable","renderable/RenderObject", "renderable/Flashlight"], function(Renderable, RenderObject, Flashlight) {
+  var stage = new createjs.Stage(document.getElementById('canvas'));
+
+  // Just test code
 
   console.log("Game start!");
 
@@ -7,21 +10,20 @@ define("main", ["renderable/Renderable","renderable/RenderObject", "renderable/F
           .drawCircle(0,0,10);
 
   var a = new Renderable.Renderable(graphics);
-  var b = new RenderObject.RenderObject();
+  
+  
+  var graphics2 = new createjs.Graphics();
+  graphics2.beginFill('blue')
+           .drawCircle(0,0,20);
 
-
-  var stage = new createjs.Stage(document.getElementById('canvas'));
+  var b = new RenderObject.RenderObject(graphics2);
 
   a.setPosition({x:20,y:20});
 
   stage.addChild(a.symbol);
   stage.addChild(b.symbol);
-
-
-  stage.update();
-
-  console.log(a.getPosition());
-  console.log(b.getPosition());
+  
+  // End test code
 
 	var flashlight = new Flashlight.Flashlight();
 	stage.addChild(flashlight.symbol);
