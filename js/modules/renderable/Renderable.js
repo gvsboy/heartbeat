@@ -1,20 +1,19 @@
-define("renderable", ["lib/fiber.min"], function(Fiber) {
+define("renderable", ["lib/fiber.min", "Vectors"], function(Fiber, v) {
 
   exports.Renderable = Fiber.extend(function() {
 
     function getPosition() {
-      return {x: this.symbol.x, y: this.symbol.y};
+      return new v.Vec2d(this.symbol.x, this.symbol.y);
     }
 
     function setPosition(val) {
-      //this.symbol = val;
       this.symbol.x = val.x;
       this.symbol.y = val.y;
     }
 
-    function move(x, y) {
-      this.symbol.x += x;
-      this.symbol.y += y;
+    function move(v) {
+      this.symbol.x += v.x;
+      this.symbol.y += v.y;
     }
 
     function getSymbol() {

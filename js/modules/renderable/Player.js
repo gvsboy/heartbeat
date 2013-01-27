@@ -12,32 +12,29 @@ define('Player', ['renderable/RenderObject'], function(ro) {
           speed = this.speed;
           
       if (pr[LEFT] && !pr[RIGHT]) {
-        this.setXVel(-speed);
+        this.dir.x = -1;
       } else if (pr[RIGHT] && !pr[LEFT]) {
-        this.setXVel(speed);
+        this.dir.x = 1;
       } else {
-        this.setXVel(0);
+        this.dir.x = 0;
       }
 
       if (pr[UP] && !pr[DOWN]) {
-        this.setYVel(-speed);
+        this.dir.y = -1;
       } else if (pr[DOWN] && !pr[UP]) {
-        this.setYVel(speed);
+        this.dir.y = 1;
       } else {
-        this.setYVel(0);
+        this.dir.y = 0;
       }
 
       base.update.call(this);
     }
     
     function init(conf) {
-      conf.vel = conf.vel || {x: 0, y: 0};
-      conf.acc = conf.acc || {x: 0, y: 0};
       conf.graphics = conf.graphics || (new createjs.Graphics()).beginFill('green')
                                                                 .drawCircle(10,10,5);
 
       this.keyboard = conf.keyboard;
-      this.speed = conf.speed || 5;
           
       base.init.call(this, conf);
     }

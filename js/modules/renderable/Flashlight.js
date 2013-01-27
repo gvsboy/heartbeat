@@ -13,6 +13,8 @@ define("flashlight", ["renderable/Renderable"], function(Renderable) {
 				this.radius = 120;
 				this.colors = ["rgba(102, 102, 102, 0)", "rgba(0, 0, 0, 0.9)"];
 				this.ratios = [0, 1];
+
+        this.lastUpdate = (new Date()).getTime();
 			},
 			
 			update: function() {
@@ -25,6 +27,11 @@ define("flashlight", ["renderable/Renderable"], function(Renderable) {
 				else {
 					x = this.stage.mouseX;
 					y = this.stage.mouseY;
+
+          //if ((new Date()).getTime() - this.lastUpdate > 200) {
+            //this.radius -= 1;
+          //}
+
 					this.symbol.graphics.clear();
 					this.symbol.graphics
 						.setStrokeStyle(1)
@@ -43,7 +50,7 @@ define("flashlight", ["renderable/Renderable"], function(Renderable) {
 				stage.mask = this.symbol;
 			}
 			
-		}
+		};
 		
 	});
 	

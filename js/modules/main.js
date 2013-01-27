@@ -3,9 +3,10 @@ define("main", [
 	"renderable/RenderObject",
 	"renderable/Player",
   "renderable/Monster",
-	"renderable/Flashlight"
+	"renderable/Flashlight",
+  "Vectors"
 ],
-function(Renderable, RenderObject, Player, Monster, Flashlight) {
+function(Renderable, RenderObject, Player, Monster, Flashlight, Vectors) {
 	
   var stage = new createjs.Stage(document.getElementById('canvas'));
 
@@ -60,8 +61,9 @@ function(Renderable, RenderObject, Player, Monster, Flashlight) {
   var Monsters = {
     list: [],
     add: function() {
-      var newMon = new Monster.Monster({player: c, pos: {x: Math.floor(Math.random()*450), y: Math.floor(Math.random()*450)}});
-      stage.addChild(newMon.symbol);
+      var posVec = new Vectors.Vec2d(Math.floor(Math.random()*450), Math.floor(Math.random()*450));
+      var newMon = new Monster.Monster({player: c, pos: posVec});
+      stage.addChildAt(newMon.symbol, 1);
       this.list.push(newMon);
     },
     update: function() {
@@ -71,16 +73,20 @@ function(Renderable, RenderObject, Player, Monster, Flashlight) {
     }
   };
 
-  a.setPosition({x:20,y:20});
+  a.setPosition(new Vectors.Vec2d(20, 20));
 
   stage.addChild(a.symbol);
   stage.addChild(b.symbol);
   stage.addChild(c.symbol);
 
-  window.mon = setInterval(function(){Monsters.add();}, 2000);
+  $('#add-monster').click(function() {
+    Monsters.add();
+  });
+  
   // End test code
 
 	var flashlight = new Flashlight.Flashlight();
+  flashlight.radius = 400;
 	stage.addChild(flashlight.symbol);
 	
 	var ticker = createjs.Ticker;
@@ -89,7 +95,7 @@ function(Renderable, RenderObject, Player, Monster, Flashlight) {
 	ticker.setFPS(30);
 	
 	function tick() {
-    	c.update();
+    c.update();
 		flashlight.update();
     Monsters.update();
 		stage.update();
