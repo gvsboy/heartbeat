@@ -1,4 +1,7 @@
 define("main", ["renderable/Renderable","renderable/RenderObject"], function(Renderable, RenderObject) {
+  var stage = new createjs.Stage(document.getElementById('canvas'));
+
+  // Just test code
 
   console.log("Game start!");
 
@@ -7,20 +10,23 @@ define("main", ["renderable/Renderable","renderable/RenderObject"], function(Ren
           .drawCircle(0,0,10);
 
   var a = new Renderable.Renderable(graphics);
-  var b = new RenderObject.RenderObject();
+  
+  
+  var graphics2 = new createjs.Graphics();
+  graphics2.beginFill('blue')
+           .drawCircle(0,0,20);
 
-
-  var stage = new createjs.Stage(document.getElementById('canvas'));
+  var b = new RenderObject.RenderObject(graphics2);
 
   a.setPosition({x:20,y:20});
 
   stage.addChild(a.symbol);
   stage.addChild(b.symbol);
+  
+  // End test code
 
 
-  stage.update();
-
-  console.log(a.getPosition());
-  console.log(b.getPosition());
+  // Have stage listen to the ticker.
+  createjs.Ticker.addListener(stage);
 
 });

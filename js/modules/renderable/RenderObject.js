@@ -7,12 +7,8 @@ define('RenderObject', ['renderable/Renderable'], function(r) {
     // Private
 
     // Public
-    function init () {
-      var graphics = new createjs.Graphics();
-      graphics.beginFill('blue')
-      .drawCircle(0,0,10);
-      
-      base.init.call(this, graphics);
+    function init (g) {
+      base.init.call(this, g);
     }
 
     return {
