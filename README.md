@@ -1,7 +1,8 @@
-===================================
-= Global Game Jam - San Francisco =
-=           HEARTBEAT             =
-===================================
+Global Game Jam - San Francisco
+===============================
+
+HEARTBEAT
+---------
 
 - Top-down view, move in all directions (WASD)
 - Mouse moves flashlight orb
