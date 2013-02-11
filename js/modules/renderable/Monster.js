@@ -19,7 +19,7 @@ define('Monster', ['lib/fiber.min', 'renderable/RenderObject', 'AI'], function(F
       this.addInterestCat('ally');
 
       this.addBehavior('food', function(foods) {
-        var closestFood = this.closest(foods);
+        var closestFood = this.closest(foods, 1);
           
         // direct path
         var pureDiff = closestFood.getPosition().sub(this.getPosition());

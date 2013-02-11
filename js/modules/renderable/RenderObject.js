@@ -30,41 +30,27 @@ define('RenderObject', ['renderable/Renderable', 'Vectors'], function(r, v) {
     }
 
     function closest(collection, number) {
-      var smallestDist,
-          dist,
-          i,
-          close = [];
+      var myPos = this.getPosition();
 
       if (collection) {
-        smallestDist = this.distance(collection[0].getPosition());
-        close.push(collection[0]);
-
-        if (collection.length > 1) {
-          for (i = 1; i < collection.length; i++) {
-            dist = this.distance(collection[i].getPosition());
-
-            if (dist < smallestDist) {
-              smallestDist = dist;
-              close.unshift(collection[i]);
-            }
-          }
-        }
+        collection.sort(function (a,b) {
+          return myPos.sub(a.getPosition()) - myPos.sub(b.getPosition());
+        });
       }
 
-      // NEED TO ADJUST TO PROPERLY RETURN A FULL ARRAY OF THE CLOSEST X
-      return close[0];
+      return number ? collection.slice(0, number) : collection;
     }
 
     function within(collection, dist) {
-      var i,
+      var myPos = this.getPosition(),
           result = [];
       if (collection) {
-        for (i = 0; i < collection.length; i++) {
-          if (this.distance(collection[i].getPosition()) <= dist) {
-            result.push(collection[i]);
-          }
-        }
+        result = collection.filter(function (a) {
+          return myPos.sub(a.getPosition()) < dist;
+        });
       }
+
+      return result;
     }
 
     function update() {
@@ -82,9 +68,7 @@ define('RenderObject', ['renderable/Renderable', 'Vectors'], function(r, v) {
       this.vel = new v.Vec2d(0,0);
       this.dir = new v.Vec2d(0,0);
 
-      // Not actually using acc for anything atm.
-      this.acc = new v.Vec2d(0,0);
-
+      // Not actually using acc for anything atm.  this.acc = new v.Vec2d(0,0); 
       this.speed = conf.speed || 5;
 
       if (conf.pos) this.setPosition(conf.pos);

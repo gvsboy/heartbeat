@@ -1,19 +1,7 @@
 
-define('AI', function() {
+define('AI', ['Vectors'], function(Vectors) {
 
   exports.AI = function(base) {
-
-    function normalize(norm, pos1, pos2) {
-      var posDiff = pos2 ? positionDifference(pos1, pos2) : pos1,
-      dist = Math.sqrt(Math.pow(posDiff.x,2)+Math.pow(posDiff.y,2)),
-      scale = dist ? norm/dist : 0;
-
-      return {x: posDiff.x * scale, y: posDiff.y * scale};
-    }
-
-    function positionDifference(pos1, pos2) {
-      return {x: pos1.x - pos2.x, y: pos1.y - pos2.y};
-    }
 
     function addInterest(cat, interest) {
       if (this.interests && this.interests[cat]) {
@@ -39,11 +27,6 @@ define('AI', function() {
       this.behaviors[cat] = behavior;
     }
 
-  function distance(tar) {
-    var myPos = this.getPosition();
-    return Math.sqrt((tar.x -= myPos.x) * tar.x + (tar.y -= myPos.y) * tar.y);
-  }
-
   function process() {
     var cat, i, interests = this.interests, behaviors = this.behaviors;
 
@@ -56,8 +39,6 @@ define('AI', function() {
         behaviors[cat].call(this, interests[cat]);
       }
     }
-
-    
   }
 
   return {
